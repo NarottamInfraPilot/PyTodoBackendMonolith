@@ -48,3 +48,13 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
   displayName: publish artifacts
+- task: AzureRmWebAppDeployment@5
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'my-sc-backend-pytodo'
+    appType: 'webAppLinux'
+    WebAppName: 'PyTodoBackendMonolith'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'PYTHON|3.13'
+    StartupCommand: 'gunicorn -k uvicorn.workers.UvicornWorker app:app'
+    DeploymentTypeLinux: 'oneDeploy'
