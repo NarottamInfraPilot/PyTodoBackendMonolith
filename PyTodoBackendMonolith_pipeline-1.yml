@@ -3,15 +3,15 @@ trigger:
 
 pool: mypool
 
-parameters:
-  - name: env
-    type: string
-    displayName: enviromnent batana hai
-    default: dev
-    values:
-      - dev
-      - qa
-      - prod
+# parameters:
+#   - name: env
+#     type: string
+#     displayName: enviromnent batana hai
+#     default: dev
+#     values:
+#       - dev
+#       - qa
+#       - prod
 
 
 steps:
