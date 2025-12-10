@@ -9,15 +9,12 @@ trigger:
 pool: mypool
 
 steps:
-# - task: UsePythonVersion@0
-#   inputs:
-#     versionSpec: '3.x'
-#     addToPath: true
-#     architecture: 'x64'
-# - task: PythonScript@0
-#   inputs:
-#     scriptSource: 'inline'
-#     script: 'python -m pip install --upgrade pip'
+
 - script: |
-    pip install -r requirements.txt      
-  displayName: install dependency
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: "Create venv and install dependencies"
+
+
