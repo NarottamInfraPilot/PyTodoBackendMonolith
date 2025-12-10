@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
   none
 
@@ -16,23 +11,29 @@ steps:
     pip install --upgrade pip
     pip install -r requirements.txt
   displayName: "Create venv and install dependencies"
+
 - script: |
     pytest
   displayName: running pytest
   continueOnError: true
+
+- script: |
+    sudo apt-get update
+    sudo apt-get install -y zip
+  displayName: "Install zip tool"
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/drop'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/drop.zip'
     replaceExistingArchive: true
   displayName: Archive app
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
   displayName: publish artifacts
-
-
