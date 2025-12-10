@@ -54,7 +54,8 @@ steps:
     azureSubscription: 'my-sc-backend-pytodo'
     appType: 'webAppLinux'
     WebAppName: 'PyTodoBackendMonolith'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/drop.zip'
     RuntimeStack: 'PYTHON|3.13'
     StartupCommand: 'gunicorn -k uvicorn.workers.UvicornWorker app:app'
     DeploymentTypeLinux: 'oneDeploy'
+
